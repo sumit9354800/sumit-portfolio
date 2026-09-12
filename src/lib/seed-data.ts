@@ -1,0 +1,389 @@
+import { PortfolioData } from '../types/portfolio';
+
+export const initialPortfolioData: PortfolioData = {
+  site: {
+    name: "Sumit Shrivastav",
+    title: "Full Stack Developer & Creative Engineer",
+    email: "sumit9354800@gmail.com",
+    phone: "+91 9354800375",
+    location: "Uttam Nagar, Delhi – 110059",
+    seo: {
+      metaTitle: "Sumit Shrivastav — Full Stack Developer & MERN Engineer",
+      metaDescription: "Production-ready portfolio and CMS for Sumit Shrivastav. Self-taught MERN stack & Next.js engineer building high-performance web applications.",
+      keywords: [
+        "Sumit Shrivastav",
+        "Full Stack Developer",
+        "MERN Stack Engineer",
+        "Next.js Developer",
+        "Frontend Creative Engineer",
+        "Delhi Web Developer",
+        "React",
+        "Node.js",
+        "MongoDB"
+      ],
+      ogTitle: "Sumit Shrivastav — Full Stack Developer",
+      ogDescription: "Self-taught MERN stack developer building fast, clean, and production-ready web applications. From database to deployment.",
+      canonicalUrl: "https://sumit-shrivastav-portfolio.vercel.app"
+    }
+  },
+  hero: {
+    name: "SUMIT SHRIVASTAV",
+    role: "FULL STACK DEVELOPER",
+    rotatingTitles: [
+      "Full Stack Developer",
+      "MERN Stack Engineer",
+      "Next.js Developer",
+      "Frontend Creative Engineer"
+    ],
+    description: "Self-taught MERN stack developer building fast, clean, and production-ready web applications. From database to deployment — I own the full stack.",
+    availability: "AVAILABLE FOR OPPORTUNITIES",
+    location: "UTTAM NAGAR, DELHI – 110059",
+    primaryCtaText: "EXPLORE WORK",
+    primaryCtaLink: "#projects",
+    secondaryCtaText: "GET IN TOUCH",
+    secondaryCtaLink: "#contact",
+    enabled: true
+  },
+  about: {
+    headline: "BUILDING THE WEB, ONE COMMIT AT A TIME.",
+    paragraphs: [
+      "I am a self-taught Full Stack Developer with an uncompromising focus on shipping production-grade applications that combine robust system architecture with responsive, polished user interfaces.",
+      "My engineering journey has been driven by solving real problems for businesses and clients: from engineering commercial client portals with sub-second response times to architecting scalable MERN backends with secure tokenized authentication.",
+      "Currently pursuing a Bachelor of Computer Applications (BCA) at IGNOU, I bridge core theoretical computing concepts with everyday production deployments. When building software, I take end-to-end ownership: schema design, API security, UI choreography, and cloud delivery."
+    ],
+    stats: [
+      { label: "Commercial Deliveries", value: "03" },
+      { label: "Practice Projects", value: "06" },
+      { label: "Total Shipped", value: "09" },
+      { label: "Awards Won", value: "01" }
+    ],
+    highlights: [
+      "Full-lifecycle MERN & Next.js production deployments",
+      "Obsessive focus on Core Web Vitals and sub-second performance",
+      "Strong command of REST API design, JWT security, and indexed database queries",
+      "Deep interest in creative engineering, 3D interactive graphics, and micro-interactions"
+    ]
+  },
+  skills: [
+    // Frontend
+    { id: "sk-1", name: "Next.js", category: "frontend", featured: true, enabled: true, order: 1, description: "App Router, SSR, SSG, Server Actions, API routes" },
+    { id: "sk-2", name: "React", category: "frontend", featured: true, enabled: true, order: 2, description: "Hooks, Context, custom hooks, atomic component design" },
+    { id: "sk-3", name: "TypeScript", category: "frontend", featured: true, enabled: true, order: 3, description: "Strict type safety, generics, interfaces, Zod schemas" },
+    { id: "sk-4", name: "JavaScript", category: "frontend", featured: true, enabled: true, order: 4, description: "ES6+, async/await, event loops, DOM performance" },
+    { id: "sk-5", name: "Redux Toolkit", category: "frontend", featured: false, enabled: true, order: 5, description: "Global state slices, thunks, RTK query caching" },
+    { id: "sk-6", name: "Tailwind CSS", category: "frontend", featured: true, enabled: true, order: 6, description: "Utility-first architecture, dark mode, responsive layouts" },
+    { id: "sk-7", name: "HTML5 & CSS3", category: "frontend", featured: false, enabled: true, order: 7, description: "Semantic markup, CSS Grid/Flexbox, accessibility standards" },
+    { id: "sk-8", name: "GSAP", category: "frontend", featured: false, enabled: true, order: 8, description: "Timeline choreography, ScrollTrigger, kinetic text" },
+    { id: "sk-9", name: "Three.js", category: "frontend", featured: true, enabled: true, order: 9, description: "Interactive 3D geometry, custom lighting, camera controls" },
+    // Backend
+    { id: "sk-10", name: "Node.js", category: "backend", featured: true, enabled: true, order: 10, description: "Runtime architecture, event-driven I/O, microservices" },
+    { id: "sk-11", name: "Express.js", category: "backend", featured: true, enabled: true, order: 11, description: "RESTful API routes, middleware chains, error handling" },
+    { id: "sk-12", name: "REST APIs", category: "backend", featured: true, enabled: true, order: 12, description: "HTTP semantics, rate limiting, request validation" },
+    { id: "sk-13", name: "JWT Auth", category: "backend", featured: true, enabled: true, order: 13, description: "Secure cookie sessions, RBAC, token rotation, bcrypt" },
+    // Database & Tools
+    { id: "sk-14", name: "MongoDB", category: "database-tools", featured: true, enabled: true, order: 14, description: "Document stores, aggregation pipelines, replica sets" },
+    { id: "sk-15", name: "Mongoose", category: "database-tools", featured: true, enabled: true, order: 15, description: "Schema modeling, hooks, compound indexes, validation" },
+    { id: "sk-16", name: "SQL", category: "database-tools", featured: false, enabled: true, order: 16, description: "Relational queries, table normalization, joins" },
+    { id: "sk-17", name: "Git", category: "database-tools", featured: true, enabled: true, order: 17, description: "Version control, feature branching, rebase, merge workflows" },
+    { id: "sk-18", name: "GitHub", category: "database-tools", featured: true, enabled: true, order: 18, description: "Actions CI/CD, issue tracking, project management" },
+    { id: "sk-19", name: "Vercel", category: "database-tools", featured: true, enabled: true, order: 19, description: "Production deployments, preview branches, edge caching" }
+  ],
+  projects: [
+    {
+      id: "proj-1",
+      title: "MRTECHYCOOL Business Website",
+      slug: "mrtechycool-business-website",
+      category: "Client Project / Commercial",
+      year: "2024",
+      role: "Lead Full Stack Developer",
+      description: "Production commercial platform engineered for MRTECHYCOOL delivering digital service booking, lead generation pipeline, and technical service catalogs with sub-second load times.",
+      technologies: ["Next.js", "React", "Tailwind CSS", "Node.js", "MongoDB", "Express.js"],
+      image: "https://res.cloudinary.com/njq5pi5g/image/upload/v1788944433/techcool.png",
+      liveUrl: "https://www.mrtechycool.in/",
+      githubUrl: "https://github.com/sumit9354800/techcool",
+      challenges: "Optimizing Core Web Vitals to sub-1.2s LCP on mobile devices while integrating real-time inquiry booking with automated dispatch pipelines.",
+      solution: "Engineered server components with incremental static revalidation, lightweight SVG asset pipeline, and streamlined API routes with server-side validation.",
+      features: [
+        "Automated Lead Booking Engine",
+        "Dynamic Service Catalog",
+        "Admin Analytics Dashboard",
+        "SEO & Core Web Vitals 98+"
+      ],
+      featured: true,
+      published: true,
+      order: 1
+    },
+    {
+      id: "proj-2",
+      title: "Growje Business Website",
+      slug: "growje-business-website",
+      category: "Client Project / Commercial",
+      year: "2024",
+      role: "Full Stack Web Developer",
+      description: "High-conversion corporate business portal for Growje facilitating enterprise business solutions, client onboarding, and digital marketing consulting services.",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js", "MongoDB", "REST APIs"],
+      image: "https://res.cloudinary.com/njq5pi5g/image/upload/v1788944324/growje.png",
+      liveUrl: "https://growje.com/",
+      githubUrl: "https://github.com/sumit9354800/growje",
+      challenges: "Building a responsive, high-performance portal with zero layout shifts and custom interactive inquiry funnels.",
+      solution: "Developed modular atomic components, validated contact pathways with Zod, and configured aggressive asset caching headers.",
+      features: [
+        "Custom Client Onboarding Funnel",
+        "Responsive Architecture across 360px-1920px",
+        "Secure Consultation Gateway",
+        "Modern Dark-Mode Technical Aesthetic"
+      ],
+      featured: true,
+      published: true,
+      order: 2
+    },
+    {
+      id: "proj-3",
+      title: "United Institute Educational Portal",
+      slug: "united-institute-educational-portal",
+      category: "Commercial / Education",
+      year: "2023",
+      role: "Frontend & Backend Engineer",
+      description: "Comprehensive educational and administrative portal for United Institute managing courses, student inquiries, academic notices, and faculty directories.",
+      technologies: ["React", "Express.js", "Node.js", "MongoDB", "Mongoose", "Tailwind CSS"],
+      image: "https://res.cloudinary.com/njq5pi5g/image/upload/v1788944453/united.png",
+      liveUrl: "https://www.unitedinstitute.org.in/",
+      githubUrl: "https://github.com/sumit9354800/united-tech-era-main",
+      challenges: "Consolidating multiple department notice streams and course syllabus downloads into a unified fast query interface.",
+      solution: "Constructed indexed MongoDB schema relations, role-segmented document access, and cached server responses.",
+      features: [
+        "Notice Board Announcement Stream",
+        "Course & Program Directory",
+        "Admission Lead Pipeline",
+        "Staff & Faculty Index"
+      ],
+      featured: true,
+      published: true,
+      order: 3
+    },
+    {
+      id: "proj-4",
+      title: "MX SAMMY | B2B Sales & Revenue Analytics CRM",
+      slug: "mx-sammy-b2b-sales-revenue-analytics-crm",
+      category: "Full Stack / SaaS CRM",
+      year: "2024",
+      role: "Full Stack Developer",
+      description: "High-performance enterprise B2B sales and revenue analytics CRM featuring real-time revenue tracking, conversion pipelines, customer lifetime metrics, and interactive multi-tier visual dashboards.",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Recharts", "Node.js", "MongoDB"],
+      image: "https://res.cloudinary.com/njq5pi5g/image/upload/v1789039538/dashbord.png",
+      liveUrl: "https://dashboard-chi-inky-30.vercel.app/",
+      githubUrl: "https://github.com/sumit9354800/dashboard",
+      challenges: "Aggregating multi-source enterprise revenue streams into sub-second interactive analytics without client-side latency or frame drops.",
+      solution: "Engineered memoized aggregation pipelines, modular dashboard cards, and optimized client state management.",
+      features: [
+        "Real-time Revenue Telemetry",
+        "Lead Conversion Pipelines",
+        "Interactive Financial Charts",
+        "Customer Lifetime Analytics"
+      ],
+      featured: true,
+      published: true,
+      order: 4
+    },
+    {
+      id: "proj-5",
+      title: "STACKED — Immersive 3D Experience",
+      slug: "stacked-immersive-3d-experience",
+      category: "Creative Engineering / 3D Web",
+      year: "2024",
+      role: "Creative Frontend Engineer",
+      description: "High-fidelity 3D spatial interactive web experiment exploring dynamic 3D burger model choreography, lighting, and real-time pointer physics.",
+      technologies: ["Three.js", "React", "GSAP", "Tailwind CSS", "TypeScript"],
+      image: "https://res.cloudinary.com/njq5pi5g/image/upload/v1788944464/burger-web.png",
+      liveUrl: "https://3-d-model-website-phi.vercel.app/",
+      githubUrl: "https://github.com/sumit9354800/3D-model-website",
+      challenges: "Maintaining a solid 60 FPS on low-power mobile devices while computing dynamic matrix transformations and lighting passes.",
+      solution: "Used instanced buffer geometries, memory pooling, and throttled pointer listeners with WebGL state memoization.",
+      features: [
+        "Custom GLSL Shader Illumination",
+        "Spatial Camera Controls",
+        "Procedural Geometry Stacking",
+        "Touch & Pointer Physics"
+      ],
+      featured: true,
+      published: true,
+      order: 5
+    },
+    {
+      id: "proj-6",
+      title: "KiranaGo — Grocery E-commerce",
+      slug: "kiranago-grocery-ecommerce",
+      category: "Web Application / Hyperlocal Delivery",
+      year: "2023",
+      role: "Full Stack Developer",
+      description: "Hyperlocal grocery discovery and ordering platform facilitating neighborhood store connections, item catalog navigation, and rapid one-tap cart checkout.",
+      technologies: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+      image: "https://res.cloudinary.com/njq5pi5g/image/upload/v1788944354/kirana.png",
+      liveUrl: "https://kirana-go-tau.vercel.app/",
+      githubUrl: "https://github.com/sumit9354800/kirana-go",
+      challenges: "Designing an ultra-intuitive order workflow for users with varying digital literacy.",
+      solution: "Created clean, high-contrast visual item tags and streamlined one-tap checkout counters.",
+      features: [
+        "Localized Store Search",
+        "Quick-Add Grocery Catalog",
+        "Dynamic Order Estimator",
+        "Mobile-First Responsive Layout"
+      ],
+      featured: false,
+      published: true,
+      order: 6
+    },
+    {
+      id: "proj-7",
+      title: "FreshCart Organics Web Application",
+      slug: "freshcart-organics-web-application",
+      category: "E-Commerce Application",
+      year: "2023",
+      role: "Frontend & Backend Engineer",
+      description: "Farm-to-table organic produce platform with categorical filters, seasonal product badges, weight-based pricing, and price breakdown computations.",
+      technologies: ["React", "JavaScript", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+      image: "https://res.cloudinary.com/njq5pi5g/image/upload/v1788944300/freshcart.png",
+      liveUrl: "https://freshcart-organics.vercel.app/",
+      githubUrl: "https://github.com/sumit9354800/freshcart",
+      challenges: "Handling complex price per weight calculations and dynamic promo discounts.",
+      solution: "Built deterministic calculation utility routines with unit-test verified precision.",
+      features: [
+        "Weight-Based Pricing Engine",
+        "Seasonal Filter Tags",
+        "Customer Review Threads",
+        "Receipt Generator"
+      ],
+      featured: false,
+      published: true,
+      order: 7
+    },
+    {
+      id: "proj-8",
+      title: "Airbnb Clone — Full-Stack Rental Platform",
+      slug: "airbnb-clone-full-stack-rental-platform",
+      category: "Web Application / Architecture Study",
+      year: "2023",
+      role: "Full Stack Developer",
+      description: "Comprehensive reproduction of hospitality rental workflows including date-range reservations, amenity search, host property listings, and secure user bookings.",
+      technologies: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT Auth"],
+      image: "https://res.cloudinary.com/njq5pi5g/image/upload/v1788944173/airbnb.png",
+      liveUrl: "https://airbnbclone-s4gi.onrender.com/",
+      githubUrl: "https://github.com/sumit9354800/airbnbclone",
+      challenges: "Accurately computing calendar date availability and overlapping booking conflict resolution.",
+      solution: "Engineered date boundary validation logic in MongoDB query aggregation pipelines.",
+      features: [
+        "Interactive Property Map Viewer",
+        "Date Range Availability Picker",
+        "Host Property Publishing Form",
+        "Filter by Property Type"
+      ],
+      featured: false,
+      published: true,
+      order: 8
+    },
+    {
+      id: "proj-9",
+      title: "Myntra Fashion E-Commerce UI",
+      slug: "myntra-fashion-ecommerce-ui",
+      category: "Frontend Engineering / UI Reproduction",
+      year: "2023",
+      role: "Frontend Engineer",
+      description: "Pixel-perfect responsive recreation of Myntra's catalog navigation, mega-menus, multi-tiered filter hierarchy, and product card hover carousels.",
+      technologies: ["React", "JavaScript", "Tailwind CSS", "HTML5", "CSS3"],
+      image: "https://res.cloudinary.com/njq5pi5g/image/upload/v1788944402/myntra.png",
+      liveUrl: "https://cloth-ecommerce-frontend-uhj7.vercel.app/",
+      githubUrl: "https://github.com/sumit9354800/myntra-frontend",
+      challenges: "Handling complex multi-level hover dropdown menus that remain fluid and accessible across desktop viewport breakpoints.",
+      solution: "Utilized debounced hover intent listeners, keyboard focus traps, and performant CSS transforms.",
+      features: [
+        "Nested Mega-Menu Navigation",
+        "Brand & Price Multi-Filter Slider",
+        "Product Quick-View Preview Modal",
+        "Responsive Mobile Drawer"
+      ],
+      featured: false,
+      published: true,
+      order: 9
+    }
+  ],
+  experience: [
+    {
+      id: "exp-1",
+      title: "Full Stack Web Developer",
+      role: "Full Stack Web Developer",
+      company: "Freelance & Production Shipping",
+      location: "Delhi, India",
+      startDate: "2023",
+      endDate: "Present",
+      description: "Delivering production web applications, commercial business platforms, and custom software solutions for clients and businesses. Leading full lifecycle development from database schema architecture and backend REST APIs to interactive frontend interfaces and cloud deployment.",
+      responsibilities: [
+        "Engineered and deployed 3 commercial client web platforms (MRTECHYCOOL, Growje, United Institute) with high uptime and optimized performance.",
+        "Designed normalized MongoDB schemas, secure JWT authentication gateways, and RESTful API endpoints in Node.js/Express.",
+        "Crafted responsive, high-fidelity user interfaces utilizing React, Next.js, TypeScript, and modern CSS architecture.",
+        "Optimized Core Web Vitals to achieve 95+ performance benchmarks across mobile and desktop devices."
+      ],
+      technologies: ["Next.js", "React", "TypeScript", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Vercel"],
+      companyUrl: "https://github.com/sumit9354800",
+      order: 1,
+      enabled: true
+    }
+  ],
+  education: [
+    {
+      id: "edu-1",
+      institution: "Indira Gandhi National Open University (IGNOU)",
+      degree: "Bachelor of Computer Applications (BCA)",
+      field: "Computer Science & Software Development",
+      startYear: "2024",
+      endYear: "2027",
+      status: "In Progress",
+      description: "Rigorous coursework in data structures, computer algorithms, database management systems (DBMS), operating systems, software engineering methodologies, and web computing.",
+      order: 1,
+      enabled: true
+    }
+  ],
+  certifications: [
+    {
+      id: "cert-1",
+      title: "Best Website Development Award",
+      issuer: "Web Development Innovation Challenge",
+      year: "2024",
+      description: "Awarded for demonstrating exceptional technical architecture, performance optimization, and creative engineering in commercial web development.",
+      order: 1,
+      enabled: true
+    },
+    {
+      id: "cert-2",
+      title: "Diploma in Web Development",
+      issuer: "Certified Technical Institute",
+      year: "2023",
+      description: "Comprehensive certification covering full-stack web technologies, modern JavaScript (ES6+), responsive design, and database systems.",
+      order: 2,
+      enabled: true
+    }
+  ],
+  contact: {
+    email: "sumit9354800@gmail.com",
+    phone: "+91 9354800375",
+    location: "Uttam Nagar, Delhi – 110059",
+    availability: "AVAILABLE FOR OPPORTUNITIES",
+    description: "Open for full-time roles, contract projects, and ambitious collaborations. Drop a message — I respond within 24 hours."
+  },
+  social: {
+    github: "https://github.com/sumit9354800",
+    linkedin: "https://linkedin.com/in/sumit-srivastav-6636ab379",
+    email: "mailto:sumit9354800@gmail.com"
+  },
+  navigation: [
+    { id: "nav-1", label: "HOME", href: "#hero", enabled: true, order: 1 },
+    { id: "nav-2", label: "ABOUT", href: "#about", enabled: true, order: 2 },
+    { id: "nav-3", label: "SKILLS", href: "#skills", enabled: true, order: 3 },
+    { id: "nav-4", label: "PROJECTS", href: "#projects", enabled: true, order: 4 },
+    { id: "nav-5", label: "EXPERIENCE", href: "#experience", enabled: true, order: 5 },
+    { id: "nav-6", label: "CREDENTIALS", href: "#credentials", enabled: true, order: 6 },
+    { id: "nav-7", label: "CONTACT", href: "#contact", enabled: true, order: 7 }
+  ]
+};
+
+export const SEED_DATA = initialPortfolioData;
+
