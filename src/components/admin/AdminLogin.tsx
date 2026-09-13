@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Lock, Shield, Terminal, ArrowLeft, AlertCircle } from 'lucide-react';
+import { setAdminToken } from '../../lib/admin-api';
 
 interface AdminLoginProps {
   onSuccess: (admin: { email: string; name: string; role: string }) => void;
@@ -8,7 +9,7 @@ interface AdminLoginProps {
 
 export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess, onCancel }) => {
   const [email, setEmail] = useState('sumit9354800@gmail.com');
-  const [password, setPassword] = useState('adminpassword123');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,12 +22,16 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess, onCancel }) =
       const res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
 
       if (res.ok && data.success) {
+        if (data.token) {
+          setAdminToken(data.token);
+        }
         onSuccess(data.data);
       } else {
         setError(data.error || 'Authentication failed. Please verify credentials.');
@@ -119,7 +124,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess, onCancel }) =
             <span>AUTH_STATUS: ENCRYPTED_HTTP_ONLY_COOKIE</span>
           </div>
           <div className="p-2.5 bg-[#0E0E0E] border border-[#1A1A1A] font-mono text-[10px] text-[#777777] leading-relaxed">
-            <span className="text-[#AAAAAA] font-bold">DEV ACCESS:</span> Configured in <code className="text-[#CCCCCC]">.env.example</code> (Email: <span className="text-white">sumit9354800@gmail.com</span> / Password: <span className="text-white">adminpassword123</span>).
+            <span className="text-[#AAAAAA] font-bold">DATABASE AUTH:</span> Credentials stored securely in MongoDB / Database Store. Enter your secret admin password to authenticate.
           </div>
         </div>
       </div>

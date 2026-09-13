@@ -30,6 +30,7 @@ import {
   setSessionCookie,
   clearSessionCookie,
   verifyAdminSession,
+  updateAdminPassword,
 } from './src/lib/auth';
 import { sendContactEmail } from './src/lib/resend';
 import { checkRateLimit } from './src/lib/rate-limit';
@@ -94,9 +95,18 @@ app.get('/api/health', async (_req: Request, res: Response) => {
 });
 
 // GET public portfolio data
-app.get('/api/portfolio', async (_req: Request, res: Response) => {
+app.get('/api/portfolio', async (req: Request, res: Response) => {
   try {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     const data = await getPortfolioData();
+    const adminSession = verifyAdminSession(req);
+
+    // If authenticated admin, return full dataset with all draft/unpublished items
+    if (adminSession) {
+      res.json({ success: true, data });
+      return;
+    }
+
     // Only return published projects and enabled skills for the public viewer
     const publicData = {
       ...data,
@@ -206,6 +216,7 @@ app.post('/api/admin/login', rateLimiterMiddleware(5, 60 * 1000), async (req: Re
 
     res.json({
       success: true,
+      token,
       data: {
         email,
         name: 'Sumit Shrivastav',
@@ -230,6 +241,29 @@ app.get('/api/admin/me', (req: Request, res: Response) => {
     return;
   }
   res.json({ success: true, data: session });
+});
+
+// Admin change password route (updates in MongoDB and database store)
+app.post('/api/admin/change-password', requireAdmin, async (req: Request, res: Response) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    if (!newPassword || newPassword.length < 6) {
+      res.status(400).json({ success: false, error: 'New password must be at least 6 characters.' });
+      return;
+    }
+    const adminSession = (req as any).admin;
+    const isValid = await verifyAdminCredentials(adminSession.email, currentPassword);
+    if (!isValid) {
+      res.status(401).json({ success: false, error: 'Current password is incorrect.' });
+      return;
+    }
+
+    await updateAdminPassword(newPassword);
+    res.json({ success: true, message: 'Password updated successfully in database.' });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Failed to change password';
+    res.status(500).json({ success: false, error: message });
+  }
 });
 
 // Admin System Status

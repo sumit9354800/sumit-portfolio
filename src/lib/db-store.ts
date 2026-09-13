@@ -14,6 +14,8 @@ import { CertificationModel } from '../models/Certification';
 import { ContactSettingsModel } from '../models/ContactSettings';
 import { SocialLinksModel } from '../models/SocialLinks';
 import { NavigationModel } from '../models/Navigation';
+import { AdminModel } from '../models/Admin';
+import { getStoredAdmin } from './auth';
 
 const DATA_DIR = path.resolve(process.cwd(), 'data');
 const DATA_FILE = path.join(DATA_DIR, 'portfolio-store.json');
@@ -123,6 +125,20 @@ export async function syncToMongoDB(data: PortfolioData): Promise<boolean> {
     for (const nav of data.navigation) {
       await NavigationModel.findOneAndUpdate({ id: nav.id }, nav, { upsert: true });
     }
+
+    // Sync admin credentials into MongoDB
+    const admin = getStoredAdmin();
+    await AdminModel.findOneAndUpdate(
+      { email: admin.email },
+      {
+        email: admin.email,
+        passwordHash: admin.passwordHash,
+        name: admin.name,
+        role: admin.role,
+      },
+      { upsert: true }
+    );
+
     return true;
   } catch (err) {
     console.error('[MongoDB] Sync error:', err);

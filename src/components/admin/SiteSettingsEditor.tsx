@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SiteContent, HeroContent, AboutContent, ContactSettings, SocialLinks } from '../../types/portfolio';
-import { Globe, User, MessageSquare, Share2, Save } from 'lucide-react';
+import { Globe, User, MessageSquare, Share2, Save, KeyRound, ShieldCheck } from 'lucide-react';
 
 interface SiteSettingsEditorProps {
   site: SiteContent;
@@ -21,12 +21,16 @@ export const SiteSettingsEditor: React.FC<SiteSettingsEditorProps> = ({
   onRefresh,
   showToast,
 }) => {
-  const [activeTab, setActiveTab] = useState<'site' | 'hero' | 'about' | 'contact' | 'social'>('site');
+  const [activeTab, setActiveTab] = useState<'site' | 'hero' | 'about' | 'contact' | 'social' | 'security'>('site');
   const [siteData, setSiteData] = useState<SiteContent>({ ...site });
   const [heroData, setHeroData] = useState<HeroContent>({ ...hero });
   const [aboutData, setAboutData] = useState<AboutContent>({ ...about });
   const [contactData, setContactData] = useState<ContactSettings>({ ...contact });
   const [socialData, setSocialData] = useState<SocialLinks>({ ...social });
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [changingPassword, setChangingPassword] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const handleSave = async (section: string, payload: unknown) => {
@@ -52,6 +56,44 @@ export const SiteSettingsEditor: React.FC<SiteSettingsEditorProps> = ({
     }
   };
 
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!currentPassword) {
+      showToast('error', 'Current password is required.');
+      return;
+    }
+    if (newPassword.length < 6) {
+      showToast('error', 'New password must be at least 6 characters.');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      showToast('error', 'New passwords do not match.');
+      return;
+    }
+
+    setChangingPassword(true);
+    try {
+      const res = await fetch('/api/admin/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        showToast('success', 'Admin password updated in database successfully!');
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+      } else {
+        showToast('error', data.error || 'Failed to update password');
+      }
+    } catch {
+      showToast('error', 'Network error while updating password.');
+    } finally {
+      setChangingPassword(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#1C1C1C]">
@@ -73,6 +115,7 @@ export const SiteSettingsEditor: React.FC<SiteSettingsEditorProps> = ({
           { id: 'about', label: 'ABOUT & STATS', icon: <User className="w-3.5 h-3.5" /> },
           { id: 'contact', label: 'CONTACT INFO', icon: <MessageSquare className="w-3.5 h-3.5" /> },
           { id: 'social', label: 'SOCIAL CHANNELS', icon: <Share2 className="w-3.5 h-3.5" /> },
+          { id: 'security', label: 'ADMIN SECURITY', icon: <KeyRound className="w-3.5 h-3.5" /> },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -405,6 +448,94 @@ export const SiteSettingsEditor: React.FC<SiteSettingsEditorProps> = ({
               />
             </div>
           </div>
+        </div>
+      )}
+
+      {/* ADMIN SECURITY & DATABASE CREDENTIALS TAB */}
+      {activeTab === 'security' && (
+        <div className="p-6 border border-[#1E1E1E] bg-[#0A0A0A] space-y-6 font-mono text-xs">
+          <div className="flex items-center justify-between pb-3 border-b border-[#161616]">
+            <div>
+              <span className="text-white uppercase font-bold text-sm flex items-center space-x-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>DATABASE ADMIN CREDENTIALS</span>
+              </span>
+              <p className="text-[#888888] text-[11px] mt-0.5">
+                Admin authentication credentials are saved in MongoDB &amp; Database Store (removed from environment variables).
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-[#111111] border border-[#222222]">
+            <div>
+              <span className="block text-[#777777] uppercase text-[10px] mb-1">REGISTERED ADMIN EMAIL</span>
+              <div className="text-white font-bold text-sm tracking-wide">sumit9354800@gmail.com</div>
+            </div>
+            <div>
+              <span className="block text-[#777777] uppercase text-[10px] mb-1">STORAGE ENGINE</span>
+              <div className="text-emerald-400 font-bold text-xs tracking-wide flex items-center space-x-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>MongoDB &amp; Database Store (Bcrypt Hashed)</span>
+              </div>
+            </div>
+          </div>
+
+          <form onSubmit={handleChangePassword} className="space-y-4 pt-2">
+            <div className="text-white font-bold uppercase tracking-wider text-xs border-b border-[#1A1A1A] pb-2">
+              UPDATE ADMIN PASSWORD
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-[#888888] uppercase mb-1">CURRENT PASSWORD</label>
+                <input
+                  type="password"
+                  required
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  placeholder="Current password"
+                  className="w-full px-3 py-2 bg-[#121212] border border-[#242424] focus:border-white text-white focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[#888888] uppercase mb-1">NEW PASSWORD</label>
+                <input
+                  type="password"
+                  required
+                  minLength={6}
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Min 6 characters"
+                  className="w-full px-3 py-2 bg-[#121212] border border-[#242424] focus:border-white text-white focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[#888888] uppercase mb-1">CONFIRM NEW PASSWORD</label>
+                <input
+                  type="password"
+                  required
+                  minLength={6}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Re-enter new password"
+                  className="w-full px-3 py-2 bg-[#121212] border border-[#242424] focus:border-white text-white focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={changingPassword}
+                className="px-5 py-2.5 bg-white text-black font-bold uppercase hover:bg-[#D4D4D4] disabled:bg-[#444444] flex items-center space-x-2 transition-colors"
+              >
+                <KeyRound className="w-3.5 h-3.5" />
+                <span>{changingPassword ? 'UPDATING IN DATABASE...' : 'UPDATE PASSWORD IN DATABASE'}</span>
+              </button>
+            </div>
+          </form>
         </div>
       )}
     </div>

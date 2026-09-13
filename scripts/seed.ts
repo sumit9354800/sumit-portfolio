@@ -78,12 +78,13 @@ async function runSeed() {
     await NavigationModel.findOneAndUpdate({ id: nav.id }, nav, { upsert: true });
   }
 
-  const adminEmail = (process.env.ADMIN_EMAIL || 'sumit9354800@gmail.com').trim().toLowerCase();
-  const rawPassword = process.env.ADMIN_PASSWORD || 'adminpassword123';
+  // Initialize Admin account in MongoDB directly
+  const adminEmail = 'sumit9354800@gmail.com';
+  const rawPassword = '340350@Ss';
   const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(rawPassword, salt);
 
-  console.log(`[Seed] Initializing Admin account (${adminEmail})...`);
+  console.log(`[Seed] Initializing Admin account in MongoDB (${adminEmail})...`);
   await AdminModel.findOneAndUpdate(
     { email: adminEmail },
     {
